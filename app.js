@@ -10,10 +10,9 @@ app.use("/flight", flightRoutes);
 
 // Connect
 
-mongoose.connect(
-  process.env.DB_CONNECTION,
-  { useNewUrlParser: true, useUnifiedTopology: true },
-  () => console.log("connected to db")
-);
+mongoose.connect(process.env.DB_CONNECTION, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 app.listen(3000);

@@ -5,11 +5,24 @@ const Flight = require("../models/Flight");
 // Routes
 
 router.get("/", async (req, res) => {
-  try {
-    const flights = await Flight.find();
-    res.json(flights);
-  } catch (err) {
-    res.json({ message: err });
+  if (Object.keys(req.query).length > 0) {
+    try {
+      const flight = await Flight.find({
+        from: req.query.from,
+        to: req.query.to,
+        date: req.query.departure
+      });
+      res.json(flight);
+    } catch (err) {
+      res.json({ message: err });
+    }
+  } else {
+    try {
+      const flights = await Flight.find();
+      res.json(flights);
+    } catch (err) {
+      res.json({ message: err });
+    }
   }
 });
 
