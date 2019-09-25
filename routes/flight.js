@@ -7,10 +7,11 @@ const Flight = require("../models/Flight");
 router.get("/", async (req, res) => {
   if (Object.keys(req.query).length > 0) {
     try {
+      const { from, to, departure } = req.query;
       const flight = await Flight.find({
-        from: req.query.from,
-        to: req.query.to,
-        date: req.query.departure
+        from: from,
+        to: to,
+        date: new Date(departure)
       });
       res.json(flight);
     } catch (err) {
